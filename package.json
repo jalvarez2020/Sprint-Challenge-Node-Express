@@ -6,7 +6,7 @@
   "author": "Javier Alavrez <javieralvarez82@live.com>",
   "license": "MIT",
   "scripts": {
-    "sever": "nodemon index.js"
+    "server": "nodemon index.js"
   },
   "dependencies": {
     "express": "^4.16.4",
