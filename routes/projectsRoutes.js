@@ -1,10 +1,10 @@
 const projectRoute = require('express').Router();
-const projectModel = require('../data/helpers/projectModel');
+const projectDb = require('../data/helpers/projectModel');
 
 //Routes for Project CRUD 
 
-projectRoute.get('/', ( req , res ) => {
-    projectModel.get()
+projectRoute.get('/api/projects', ( req , res ) => {
+    projectDb.get()
      .then( projects => {
             res.status(200)
             .send(projects)
@@ -15,9 +15,10 @@ projectRoute.get('/', ( req , res ) => {
     })
 })
 
-projectRoute.post('/', (req, res) => {
+projectRoute.post('/api/projects', (req, res) => {
     const project = req.body;
-    projectModel.insert(project)
+    console.log(project)
+    projectDb.insert(project)
      .then( projects => {
         res.status(201)
         .send(projects)
@@ -28,9 +29,9 @@ projectRoute.post('/', (req, res) => {
     })
 })
 
-projectRoute.get('/:id', (req, res) => {
+projectRoute.get('/api/projects/:id', (req, res) => {
     const projectId = req.body.params.id;
-    projectModel.get(projectId)
+    projectDb.get(projectId)
      .then(project => {
             res.status(200)
                 .send(project)

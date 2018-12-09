@@ -1,19 +1,32 @@
 const express = require('express');
 const server = express();
-const projectRoutes = require('./routes/projectsRoutes');
+const helmet = require('helmet')
+const logger = require('morgan');
+const CM = require('./middleware/custom_middleware');
+const projectRoute = require('./routes/projectsRoutes');
 const actionsRoute = require('./routes/actionRoutes');
 const PORT = 4020;
 
+//middleware
+server.use(
+    express.json(),
+    helmet(),
+    logger('tiny'),
+ )
 
-server.use(express.json())
+//project routes
+server.use(
+    projectRoute,
+    CM.NameLength, //custom middleware
+    projectRoute.get,
+    projectRoute.post,
+    );
 
-
-server.use('/projects', projectRoutes);
-
-server.use('/actions', actionsRoute);
-
-
-
+//action routes
+server.use(
+    actionsRoute,
+    CM.DescriptionLength,
+    );
 
 
 server.listen(PORT, () => {

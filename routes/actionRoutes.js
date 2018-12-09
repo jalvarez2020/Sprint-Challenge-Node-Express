@@ -1,8 +1,9 @@
 const actionRoute = require('express').Router();
 const actionModel = require('../data/helpers/actionModel');
 
+//Routes for Action CRUD 
 
-actionRoute.get('/' , (req , res) => {
+actionRoute.get('api/actions' , (req , res) => {
     actionModel.get()
     .then( actions => {
         res.status(200)
