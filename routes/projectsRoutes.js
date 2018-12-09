@@ -5,11 +5,11 @@ const projectModel = require('../data/helpers/projectModel');
 
 projectRoute.get('/', ( req , res ) => {
     projectModel.get()
-        .then( projects => {
+     .then( projects => {
             res.status(200)
             .send(projects)
         })
-        .catch(err => {
+     .catch(err => {
             res.status(500)
             .json({errorMessage: "Failed to load projects"})
     })
@@ -18,17 +18,27 @@ projectRoute.get('/', ( req , res ) => {
 projectRoute.post('/', (req, res) => {
     const project = req.body;
     projectModel.insert(project)
-    .then( projects => {
+     .then( projects => {
         res.status(201)
         .send(projects)
     })
-    .catch( err => {
+     .catch( err => {
         res.status(400)
         .json({errorMessage: "Bad post command"});
     })
 })
 
-projectRoute.put('/', (req , res) => {
+projectRoute.get('/:id', (req, res) => {
+    const projectId = req.body.params.id;
+    projectModel.get(projectId)
+     .then(project => {
+            res.status(200)
+                .send(project)
+        })
+     .catch(err => {
+            res.status(400)
+            .json({errorMessage: "Could not retrieve project"})
+     })
     
 })
 

@@ -9,6 +9,7 @@ server.use(express.json())
 
 
 server.use('/projects', projectRoutes);
+
 server.use('/actions', actionsRoute);
 
 
