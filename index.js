@@ -2,7 +2,6 @@ const express = require('express');
 const server = express();
 const helmet = require('helmet')
 const logger = require('morgan');
-const CM = require('./middleware/custom_middleware');
 const projectRoute = require('./routes/projectsRoutes');
 const actionsRoute = require('./routes/actionRoutes');
 const PORT = 4020;
@@ -14,18 +13,19 @@ server.use(
     logger('tiny'),
  )
 
+
+
 //project routes
 server.use(
     projectRoute,
-    CM.NameLength, //custom middleware
-    projectRoute.get,
     projectRoute.post,
+    projectRoute.put,
     );
+
 
 //action routes
 server.use(
     actionsRoute,
-    CM.DescriptionLength,
     );
 
 
