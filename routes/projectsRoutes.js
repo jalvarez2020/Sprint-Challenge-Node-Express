@@ -71,6 +71,21 @@ projectRoute.put('/api/projects/:id', (req, res) => {
     })
 })
 
+//Delete existing project
+
+projectRoute.delete('/api/project/:id', (req , res) => {
+    const {id} = req.params.id;
+    projectDb.remove(id)
+        .then( removedProject => {
+            res.status(200)
+            .send(removedProject)
+        })
+        .catch(err => {
+            res.status(400)
+            .json({errorMessage: "Bad delete request"})
+        })
+})
+
 
 
 

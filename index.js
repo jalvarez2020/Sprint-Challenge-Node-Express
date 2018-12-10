@@ -21,6 +21,7 @@ server.use(
     projectRoute.get,
     projectRoute.post,
     projectRoute.put,
+    projectRoute.delete
     );
 
 
