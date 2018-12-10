@@ -1,5 +1,5 @@
 const projectRoute = require('express').Router();
-const projectDb = require('../data/helpers/projectModel');
+const projectDb = require('../data/helpers/projectModel.js');
 
 //Routes for Project CRUD 
 
@@ -33,6 +33,10 @@ projectRoute.post('/api/projects', (req, res) => {
         res.status(400)
         .json({errorMessage: "Bad post command"});
     }
+    res.catch( err => {
+        res.status(500)
+        .json({errorMessage: "This SUCKS!"})
+    })
 })
 
 //Get by ID
@@ -52,26 +56,20 @@ projectRoute.get('/api/projects/:id', (req, res) => {
 })
 
 //Update existing project
-
-projectRoute.put('/api/project/:id', (req , res) => {
+projectRoute.put('/api/projects/:id', (req, res) => {
     const project = req.body;
     const id = req.params.id;
- if(id) {
-     projectDb.update(id , project)
-        .then( updateProj => {
+    console.log("id", project)
+    projectDb.update(id, project)
+    .then( projUpdate => {
             res.status(200)
-            .sendStatus(updateProj)
-        })
-    }
- else {
-    res.status(404)
-     .json({message: "Project does not exist"})
- }
-    res.status(500)
-    .json({message: "Server error"})
- 
+            .sendStatus(projUpdate);
+    })
+    .catch( err => {
+        res.status(400)
+        .json({errorMessage: "Bad Update Command"})
+    })
 })
-
 
 
 

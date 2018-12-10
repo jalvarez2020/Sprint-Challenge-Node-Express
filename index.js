@@ -4,7 +4,7 @@ const helmet = require('helmet')
 const logger = require('morgan');
 const projectRoute = require('./routes/projectsRoutes');
 const actionsRoute = require('./routes/actionRoutes');
-const PORT = 4020;
+const PORT = 5000;
 
 //middleware
 server.use(
@@ -18,6 +18,7 @@ server.use(
 //project routes
 server.use(
     projectRoute,
+    projectRoute.get,
     projectRoute.post,
     projectRoute.put,
     );
