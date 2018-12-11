@@ -3,7 +3,7 @@ const server = express();
 const helmet = require('helmet')
 const logger = require('morgan');
 const projectRoute = require('./routes/projectsRoutes');
-const actionsRoute = require('./routes/actionRoutes');
+const actionRoute = require('./routes/actionRoutes');
 const PORT = 5000;
 
 //middleware
@@ -26,9 +26,7 @@ server.use(
 
 
 //action routes
-server.use(
-    actionsRoute,
-    );
+server.use('/', actionRoute);
 
 
 server.listen(PORT, () => {

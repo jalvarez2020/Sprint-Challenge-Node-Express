@@ -5,7 +5,7 @@ const projectDb = require('../data/helpers/projectModel.js');
 
 //Get retrieve all projects
 
-projectRoute.get('/', ( req , res ) => {
+projectRoute.get('/api/projects', ( req , res ) => {
     projectDb.get()
      .then( projects => {
             res.status(200)
@@ -78,7 +78,8 @@ projectRoute.delete('/api/project/:id', (req , res) => {
     console.log("id", id);
     projectDb.remove(id)
         .then( removedProject => {
-           res.json({message: "Deleted"})
+            res.status(200)
+            .json({message: "Deleted Project"})
         })
         .catch(err => {
             res.status(400)

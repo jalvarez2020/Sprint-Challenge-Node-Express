@@ -1,17 +1,17 @@
 const actionRoute = require('express').Router();
-const actionModel = require('../data/helpers/actionModel');
+const actionDb = require('../data/helpers/actionModel');
 
 //Routes for Action CRUD 
 
-actionRoute.get('api/actions' , (req , res) => {
-    actionModel.get()
-    .then( actions => {
-        res.status(200)
-        .json(actions);
-    })
-    .catch( err => {
-        res.status(404)
-        json({errorMessage: 'Failed to get actions'})
+actionRoute.get('api/actions', ( req , res ) => {
+    actionDb.get()
+     .then( projects => {
+            res.status(200)
+            .send(projects)
+        })
+     .catch(err => {
+            res.status(500)
+            .json({errorMessage: "Failed to load projects"})
     })
 })
 
