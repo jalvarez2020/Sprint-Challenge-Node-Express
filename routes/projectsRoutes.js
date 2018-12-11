@@ -5,7 +5,7 @@ const projectDb = require('../data/helpers/projectModel.js');
 
 //Get retrieve all projects
 
-projectRoute.get('/api/projects', ( req , res ) => {
+projectRoute.get('/', ( req , res ) => {
     projectDb.get()
      .then( projects => {
             res.status(200)
@@ -35,7 +35,7 @@ projectRoute.post('/api/projects', (req, res) => {
     }
     res.catch( err => {
         res.status(500)
-        .json({errorMessage: "This SUCKS!"})
+        .json({errorMessage: "Server error"})
     })
 })
 
@@ -74,15 +74,15 @@ projectRoute.put('/api/projects/:id', (req, res) => {
 //Delete existing project
 
 projectRoute.delete('/api/project/:id', (req , res) => {
-    const {id} = req.params.id;
+    const id = req.params.id;
+    console.log("id", id);
     projectDb.remove(id)
         .then( removedProject => {
-            res.status(200)
-            .send(removedProject)
+           res.json({message: "Deleted"})
         })
         .catch(err => {
             res.status(400)
-            .json({errorMessage: "Bad delete request"})
+            .json({errorMessage: "Bad delete request" })
         })
 })
 
